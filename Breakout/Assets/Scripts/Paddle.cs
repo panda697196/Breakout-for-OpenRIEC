@@ -18,6 +18,10 @@ public class Paddle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.isPassedLevel){
+            return;
+        }
+
         //Get horizontal movement displacement
         float xx = Input.GetAxisRaw("Horizontal");
         if (xx != 0) {

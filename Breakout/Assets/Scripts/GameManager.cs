@@ -21,8 +21,11 @@ public class GameManager : MonoBehaviour
             _isPassedLevel = value;
             if (_isPassedLevel)
             {
-                isPlaying = false;
+             //   isPlaying = false;
                 winPanel.SetActive(true);
+                Time.timeScale = 0.3f;
+                //Delayed Call Methods
+                Invoke("WinStep2",0.2f);
             }
         }
         get
@@ -30,6 +33,11 @@ public class GameManager : MonoBehaviour
             return _isPassedLevel;
         }
 
+    }
+    void WinStep2()
+    {
+        Time.timeScale = 1f;
+        isPlaying = false;
     }
     void Awake()
     {
@@ -88,6 +96,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (isPassedLevel)
+        {
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                SceneManager.LoadScene("Level1");
+            }
+        }
     }
 }

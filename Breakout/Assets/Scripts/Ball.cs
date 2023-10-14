@@ -18,6 +18,17 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.Instance.isPlaying)
+        {
+            Vector3 pos = transform.position;
+            pos.x = paddle.position.x;
+            pos.y = Reset_Y;
+            transform.position = pos;
+        }
+        if (GameManager.Instance.isPassedLevel)
+        {
+            return;
+        }
         //When the mouse is pressed, let the ball fly out
         if (Input.GetMouseButtonDown(0) && !GameManager.Instance.isPlaying)
         {
@@ -25,13 +36,7 @@ public class Ball : MonoBehaviour
             rb.velocity = speedNormalized * speed;
             GameManager.Instance.isPlaying = true;
         }
-        if (!GameManager.Instance.isPlaying)
-        {
-            Vector3 pos = transform.position; 
-            pos.x = paddle.position.x;
-            pos.y = Reset_Y;
-            transform.position = pos;
-        }
+      
         //Test Only
         if (Input.GetKey(KeyCode.Keypad0))
         {
@@ -40,5 +45,15 @@ public class Ball : MonoBehaviour
             paddle.position = pos;
         }
     }
-    
+
+    //reset speed
+    void OnCollisionExit(Collision other)
+    {
+        if (GameManager.Instance.isPlaying){
+            Vector3 sp = rb.velocity.normalized;
+            rb.velocity = sp * speed;
+        }
+        
+    }
+
 }
