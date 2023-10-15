@@ -357,6 +357,7 @@
 "Assets/Scripts/Floor.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/Paddle.cs"
+"Assets/Scripts/Test angle.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs"

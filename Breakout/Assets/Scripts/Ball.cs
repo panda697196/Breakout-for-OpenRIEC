@@ -49,8 +49,69 @@ public class Ball : MonoBehaviour
     //reset speed
     void OnCollisionExit(Collision other)
     {
-        if (GameManager.Instance.isPlaying){
+        if (GameManager.Instance.isPlaying) {
             Vector3 sp = rb.velocity.normalized;
+
+            float angle = Mathf.Asin(sp.y / 1) * Mathf.Rad2Deg;
+
+            //angle >0 
+            if (angle >= 0 && angle < 10)
+            {
+                if (sp.x > 0)
+                {
+                    float yy = Mathf.Tan(10 * Mathf.Deg2Rad);
+                    Vector3 newVelpcity = new Vector3(1f, yy, 0).normalized;
+                    sp = newVelpcity;
+                } else {
+                    float yy = Mathf.Tan(10 * Mathf.Deg2Rad);
+                    Vector3 newVelpcity = new Vector3(-1f, yy, 0).normalized;
+                    sp = newVelpcity;
+                }
+            } else if (angle > 80 && angle <= 90)
+            {
+                if(sp.x > 0)
+                {
+                    float yy = Mathf.Tan(80 * Mathf.Deg2Rad);
+                    Vector3 newVelpcity = new Vector3(1f, yy, 0).normalized;
+                    sp = newVelpcity;
+                } else
+                {
+                    float yy = Mathf.Tan(80 * Mathf.Deg2Rad);
+                    Vector3 newVelpcity = new Vector3(-1f, yy, 0).normalized;
+                    sp = newVelpcity;
+                }
+            }else if (angle < 0 && angle > -10)
+            {
+                if (sp.x > 0)
+                {
+                    float yy = Mathf.Tan(-10 * Mathf.Deg2Rad);
+                    Vector3 newVelpcity = new Vector3(1f, yy, 0).normalized;
+                    sp = newVelpcity;
+                }
+                else
+                {
+                    float yy = Mathf.Tan(-10 * Mathf.Deg2Rad);
+                    Vector3 newVelpcity = new Vector3(-1f, yy, 0).normalized;
+                    sp = newVelpcity;
+                }
+            }
+            else if (angle <- 80 && angle >= -90)
+            {
+                if (sp.x > 0)
+                {
+                    float yy = Mathf.Tan(-80 * Mathf.Deg2Rad);
+                    Vector3 newVelpcity = new Vector3(1f, yy, 0).normalized;
+                    sp = newVelpcity;
+                }
+                else
+                {
+                    float yy = Mathf.Tan(-80 * Mathf.Deg2Rad);
+                    Vector3 newVelpcity = new Vector3(-1f, yy, 0).normalized;
+                    sp = newVelpcity;
+                }
+            }
+
+
             rb.velocity = sp * speed;
         }
         
