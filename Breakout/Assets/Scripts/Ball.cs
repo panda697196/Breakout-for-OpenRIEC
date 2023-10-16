@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Ball : MonoBehaviour
 {
     private Rigidbody rb;
     public float speed;
     public Transform paddle;
-    private const float Reset_Y = -5.05f;
+    public const float Reset_Y = -5.05f;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        //paddle = GameObject.FindObjectOfType<Ball>().transform;
     }
 
     // Update is called once per frame
@@ -32,9 +34,9 @@ public class Ball : MonoBehaviour
         //When the mouse is pressed, let the ball fly out
         if (Input.GetMouseButtonDown(0) && !GameManager.Instance.isPlaying)
         {
-            Vector3 speedNormalized = new Vector3(1f, 1f, 0).normalized;
-            rb.velocity = speedNormalized * speed;
+            
             GameManager.Instance.isPlaying = true;
+            StarMove();
         }
       
         //Test Only
@@ -44,6 +46,21 @@ public class Ball : MonoBehaviour
             pos.x = transform.position.x;
             paddle.position = pos;
         }
+    }
+    public void StarMove()
+    {
+        int angle = GetRandomAngle();
+        Vector3 speedNormalized = new Vector3(1f, Mathf.Tan(angle * Mathf.Deg2Rad), 0).normalized;
+        rb.velocity = speedNormalized * speed;
+    }
+    int GetRandomAngle()
+    {
+        int angle = Random.Range(10, 170);
+        if (angle > 80 && angle < 100)
+        {
+            angle = GetRandomAngle();
+        }
+        return angle;
     }
 
     //reset speed

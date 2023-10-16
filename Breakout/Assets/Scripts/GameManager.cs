@@ -49,6 +49,10 @@ public class GameManager : MonoBehaviour
         //Initialise brick colours, random
         Brick[] allBricks = GameObject.FindObjectsOfType<Brick>();
         foreach(var item in allBricks) {
+            if (item.currType == Brick.Brick_Type.NoBreak)
+            {
+                continue;
+            }
             item.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
         }
     }
@@ -66,6 +70,14 @@ public class GameManager : MonoBehaviour
             isPlaying = false;
         }
     }
+    public bool IsLastBall
+    {
+        get
+        {
+            Ball[]allBalls = GameObject.FindObjectsOfType<Ball>();
+            return allBalls.Length == 1;
+        }
+    }
     //
     public void CheckLevelPassed ()
     {
@@ -73,6 +85,10 @@ public class GameManager : MonoBehaviour
         bool tempPassedLevel = true;
         foreach(var item in allBricks)
         {
+            if(item.currType == Brick.Brick_Type.NoBreak)
+            {
+                continue;
+            }
             if(item.enabled == false)
             {
                 continue;
@@ -82,7 +98,7 @@ public class GameManager : MonoBehaviour
         isPassedLevel = tempPassedLevel;
     }
     //Lives change
-    private void ChangeLives(int step)
+    public void ChangeLives(int step)
     {
         liveTImes += step;
         LivesText.text = "Lives:" + liveTImes;

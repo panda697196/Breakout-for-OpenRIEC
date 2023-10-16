@@ -356,6 +356,8 @@
 "Assets/Scripts/Brick.cs"
 "Assets/Scripts/Floor.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/Item.cs"
+"Assets/Scripts/Multi.cs"
 "Assets/Scripts/Paddle.cs"
 "Assets/Scripts/Test angle.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"

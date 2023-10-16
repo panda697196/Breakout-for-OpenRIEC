@@ -17,6 +17,22 @@ public class Floor : MonoBehaviour
     }
     void OnCollisionEnter(Collision other)
     {
-        GameManager.Instance.GameOver();
+        Item item = other.gameObject.GetComponent<Item>();
+        if (item != null)
+        {
+            Destroy(item.gameObject);
+        }
+        else
+        {
+            if(GameManager.Instance.IsLastBall) {
+                GameManager.Instance.GameOver();
+            }
+            else
+            {
+                Destroy(other.gameObject);
+            }
+            
+        }
+
    }
 }
